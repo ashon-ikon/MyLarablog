@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', ['uses' =>'blogController@index', 'as' => 'blog']);
+
+Route::resource('/blog', 'blogController');
