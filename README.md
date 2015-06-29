@@ -1,0 +1,2 @@
+# MyLarablog
+Small Laravel Blog
