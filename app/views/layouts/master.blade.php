@@ -6,13 +6,14 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         @section('scripts')
         <script type="app"></script>
+        <script src="js/angular.min.js"></script>
         @show
     </head>
     <body>
-        <div class="container">
+        <section class="container">
             <h1>@yield('title')</h1>
             @yield('content')
-        </div>
-        <div class="footer">@yield('footer')</div>
+        </section>
+        <footer class="footer">@yield('footer')</footer>
     </body>
 </html>

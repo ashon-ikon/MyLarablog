@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('MyBlog\\MyUserSeeder');
 		$this->call('MyBlog\\MyBlogSeeder');
 		$this->call('MyBlog\\MyPostSeeder');
-                $this->call('MyBlog\\MyTagSeeder');
-                // Link the tags to the post
+        $this->call('MyBlog\\MyTagSeeder');
+        $this->call('MyBlog\\MyPostTagSeeder');
+        $this->call('MyBlog\\MyPostUserSeeder');
+        // Link the tags to the post
                 
 	}
 

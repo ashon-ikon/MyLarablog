@@ -32,11 +32,33 @@
 
 namespace MyBlog;
 
-class MyPostTagSeeder  extends \DatabaseSeeder
+use DatabaseSeeder;
+use Faker\Factory;
+
+class MyPostTagSeeder  extends DatabaseSeeder
 {
     public function run() {
+        $tags = MyTag::all();
+        $ids   = $tags->lists('id');
+        $total  = count($ids);
+        $faker  = Factory::create();
         foreach (MyPost::all() as $post) {
             
+            if (!empty($ids)) {
+                
+                // Generate random number of tags
+                foreach (range(1, $faker->numberBetween(0, $total -1)) as $value) {
+                    
+                    $postTag    = new MyPostTag();
+                    $postTag->tag_id = $ids[$faker->numberBetween(0, $total -1 )];
+                    $postTag->post_id = $post->id;
+                    try {
+                        $postTag->save();
+                    } catch (\Exception $e) {
+                        // Skip
+                    }
+                }
+            }
         }
     }
 }
