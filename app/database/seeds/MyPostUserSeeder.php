@@ -1,7 +1,7 @@
 <?php
+
 /*
- * MyTagSeeder
- * 
+ *  MyPostTagSeeder
  *  @author yinka
  *  @created 2015
  */
@@ -34,24 +34,24 @@ namespace MyBlog;
 
 use DatabaseSeeder;
 use Faker\Factory;
+use MyBlog\MyPost;
+use MyBlog\MyUser;
 
-/**
- * Description of 
- *
- * @author yinka
- */
-class MyTagSeeder extends DatabaseSeeder
+class MyPostUserSeeder  extends DatabaseSeeder
 {
-    public function run()
-    {
-        $faker  = Factory::create();
-        for ($i = 1; $i <= 6; $i++)
-        {
-            $tag    = new MyTag();
-            $tag->text = $faker->word;
-            $tag->created_at = date('Y-m-d H:i:s');
-            $tag->save();
-        }
+    public function run() {
         
+        $users = MyUser::all();
+        $ids   = $users->lists('id');
+        $faker  = Factory::create();
+        foreach (MyPost::all() as $post) {
+            
+            if (!empty($ids)) {
+                $postuser    = new MyPostUser();
+                $postuser->user_id = $ids[$faker->numberBetween(0, count($ids) -1 )];
+                $postuser->post_id = $post->id;
+                $postuser->save();
+            }
+        }
     }
 }

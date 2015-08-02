@@ -44,18 +44,18 @@ class MyPost extends\Eloquent
     protected $table = 'my_posts';
     
     /**
-     * Every post may be linked to many posts
+     * Every post may be linked to many tags
      */
-    public function posts()
+    public function tags()
     {
-        $this->belongsToMany('MyBlog\\MyTag' , 'my_post__tag', 'post_id', 'tag_id');
+        return $this->belongsToMany('MyBlog\\MyTag' , 'my_post__tag', 'post_id', 'tag_id');
     }
     
     /**
-     * Many post may be written by many one users
+     * Many post may be written by many one author
      */
-    public function users()
+    public function author()
     {
-        $this->belongsTo('MyBlog\\MyUser' , 'my_post__user', 'post_id', 'user_id');
+        return $this->belongsToMany('MyBlog\\MyUser' , 'my_post__user', 'post_id', 'user_id');
     }
 }

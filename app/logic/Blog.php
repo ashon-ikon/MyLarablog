@@ -28,6 +28,8 @@
 */
 namespace MyBlog;
 
+use Illuminate\Database\QueryException;
+
 class Blog {
     
     use TraitSingleton;
@@ -39,7 +41,11 @@ class Blog {
      */
     public function getBlogRoll()
     {
-        $roll = MyPost::all();
+        try {
+            $roll = MyPost::with('author')->get();
+        } catch (QueryException $e) {
+            $roll = [];
+        }
         return $roll;
     }
 }
