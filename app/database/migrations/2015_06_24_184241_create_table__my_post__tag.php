@@ -28,7 +28,7 @@ class CreateTableMyPostTag extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('my_post__tag');
+		Schema::dropIfExists('my_post__tag');
 	}
 
 }
