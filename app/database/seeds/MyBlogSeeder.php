@@ -12,11 +12,6 @@ use DatabaseSeeder;
 use Faker\Factory;
 use MyBlog;
 
-/**
- * Description of MyBlogSeeder
- *
- * @author yinka
- */
 class MyBlogSeeder extends DatabaseSeeder {
     protected  $seederStuff = 0;
     public function run() {

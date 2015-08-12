@@ -32,6 +32,7 @@
  * @property string $title Blog title
  * @property string $body Blog body
  * @property string $created_by blog updated by
+ * @method MyBlog getInstance() Returns an instance of this class
  */
 
 class MyBlog extends \Eloquent {
@@ -41,6 +42,27 @@ class MyBlog extends \Eloquent {
      * @var string 
      */
     protected $table = 'my_blog';
+
+    /**
+     * Every post may be linked to many tags
+     */
+    public function tags() 
+    {
+        return $this->belongsToMany('MyBlog\\MyTag', 'my_post__tag', 'post_id', 'tag_id');
+    }
+
+    /**
+     * Many post may be written by many one author
+     */
+    public function author() 
+    {
+        return $this->belongsToMany('MyBlog\\MyUser', 'my_post__user', 'post_id', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('MyBlog\\MyComment', 'id');
+    }
     
     
 }

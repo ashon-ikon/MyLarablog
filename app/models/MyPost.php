@@ -32,11 +32,13 @@ namespace MyBlog;
 
 /**
  * @property int $id Post Id
+ * @property int $author_id Author ID
  * @property string $title   Post's title
  * @property string $body Post Body (text)
  * @property string $excerpt Short portion from the main body
  * @property string $created_at Datetime
  * @property string $upated_at Datetime
+ * @method MyBlog getInstance() Returns an instance of this class
  * 
  */
 class MyPost extends\Eloquent
@@ -45,6 +47,7 @@ class MyPost extends\Eloquent
     
     /**
      * Every post may be linked to many tags
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function tags()
     {
@@ -53,9 +56,10 @@ class MyPost extends\Eloquent
     
     /**
      * Many post may be written by many one author
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function author()
     {
-        return $this->belongsToMany('MyBlog\\MyUser' , 'my_post__user', 'post_id', 'user_id');
+        return $this->belongsTo('MyBlog\\MyUser' , 'author_id', 'id');
     }
 }

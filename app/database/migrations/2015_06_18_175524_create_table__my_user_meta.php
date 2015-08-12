@@ -30,7 +30,7 @@ class CreateTableMyUserMeta extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('my_user_meta');
+		Schema::dropIfExists('my_user_meta');
 	}
 
 }

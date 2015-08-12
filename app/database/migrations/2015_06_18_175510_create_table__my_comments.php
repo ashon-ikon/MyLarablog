@@ -31,7 +31,7 @@ class CreateTableMyComments extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('my_comments');
+		Schema::dropIfExists('my_comments');
 	}
 
 }

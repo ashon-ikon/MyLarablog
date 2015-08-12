@@ -28,7 +28,27 @@
 */
 class blogController extends \BaseController {
 
-	/**
+    /**
+     * Blog Model
+     * @var MyBlog\Blog 
+     */
+    protected $blog     = null;
+    
+    /**
+     * Hook for iniii filter
+     */
+    public function __construct()
+    {
+        $this->beforeFilter('@initFilter');
+    }
+    
+    public function initFilter()
+    {
+        
+        $this->blog = MyBlog\Blog::getInstance();
+    }
+    
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -36,7 +56,7 @@ class blogController extends \BaseController {
 	public function index()
 	{
             // Grab all the current blog rolls send them to the view
-            $allBlogs = MyBlog\Blog::getInstance()->getBlogRoll();
+            $allBlogs = $this->blog->getBlogRoll();
             return View::make('blog.blog')->with('blogs', $allBlogs);
 	}
 
@@ -48,7 +68,7 @@ class blogController extends \BaseController {
 	 */
 	public function create()
 	{
-            $blog   = new MyBlog();
+            $blog   = $this->blog;
             return 'Create';
 	}
 
@@ -72,7 +92,10 @@ class blogController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        
+        $this->blog->getBlog($id);
+        
+		return $id;
 	}
 
 

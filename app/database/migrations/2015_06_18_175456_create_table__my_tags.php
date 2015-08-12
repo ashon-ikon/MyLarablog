@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTableMyTags extends Migration {
 
@@ -28,7 +29,7 @@ class CreateTableMyTags extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('my_tags');
+		Schema::dropIfExists('my_tags');
 	}
 
 }

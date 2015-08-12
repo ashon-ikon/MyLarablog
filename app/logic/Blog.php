@@ -42,10 +42,21 @@ class Blog {
     public function getBlogRoll()
     {
         try {
-            $roll = MyPost::with('author')->get();
+            $roll = MyPost::with(['author', 'tags'])->get();
         } catch (QueryException $e) {
             $roll = [];
         }
         return $roll;
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * @return \Illuminate\Database\Eloquent\Model BlogPost repost
+     */
+    public function getBlog($id)
+    {
+        return MyPost::findOrFail($id);
+        
     }
 }
