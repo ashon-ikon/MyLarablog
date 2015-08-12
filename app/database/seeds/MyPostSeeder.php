@@ -43,8 +43,8 @@ use Faker\Factory;
 class MyPostSeeder extends DatabaseSeeder
 {
     public function run() {
+        $ids = MyUser::all()->lists('id');
         $faker  = Factory::create();
-        
         for($i = 1; $i <= 10; $i++) {
             $post           = new MyPost();
             $post->title    = $faker->sentence(8);
@@ -52,6 +52,12 @@ class MyPostSeeder extends DatabaseSeeder
             // some magic.
             $body           = $faker->text();
             $post->body     = $body;
+            $authorId       = 0;
+            if (!empty($ids)) {
+                // Just additional protection
+                $authorId = $ids[$faker->numberBetween(0, count($ids) -1 )];
+            }
+            $post->author_id = $authorId;
             $parts          = explode(' ', $body);
             $excerptStart   = rand(0, count($parts) - 7);
             $post->excerpt  = implode(' ', array_slice($parts, $excerptStart, 6));

@@ -21,10 +21,12 @@ class MyUserSeeder extends DatabaseSeeder {
     public function run() {
         $faker  = Factory::create();
         for ($i = 0; $i < 3; $i++) {
-            $user   = new MyUser();
-            $user->username = $faker->userName;
-            $user->password = $faker->password;
-            $user->email    = $faker->email;
+            $user             = new MyUser();
+            $user->username   = $faker->userName;
+            $user->first_name = $faker->firstName;
+            $user->last_name  = $faker->lastName;
+            $user->password   = $faker->password;
+            $user->email      = strtolower($faker->email);
             $user->save();
         }
     }

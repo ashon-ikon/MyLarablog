@@ -33,8 +33,13 @@ namespace MyBlog;
 /**
  * @property int $id User Id
  * @property string $username
+ * @property string $first_name
+ * @property string $last_name
  * @property string $password Hashed password
  * @property string $email User email
+ * @property array $fillable White list of fields that will only be mass assigned
+ * @property array $guarded Fields that may not be mass assigned 
+ * @property string $hidden Fields guarded from mass select
  */
 
 class MyUser extends \Eloquent {
@@ -43,4 +48,19 @@ class MyUser extends \Eloquent {
      * @var string 
      */
     protected $table = 'my_users';
+    
+    /**
+     * Fields protected from mass selection
+     * @var array 
+     */
+    protected $hidden   = ['password'];
+    
+    /**
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts ()
+    {
+        return $this->hasMany('MyBlog\\MyPost', 'author_id', 'id');
+    }
 }
